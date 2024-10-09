@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 // Selects all elements
 const burgerMenu = document.querySelector("#burger-menu");
 const sideBarMenu = document.querySelector("#side-bar");
@@ -24,13 +32,7 @@ burgerMenu.addEventListener("click", (event) => {
   }
 });
 
-/* Création Objets contacts */
-let contacts = {
-  prenom : "",
-  nom : "",
-  email: "",
-  phone: 0,
-};
+
 /* Création Tableaux */
 let contact = [];
 
@@ -47,27 +49,47 @@ btnCreer.addEventListener('click', () => {
   let form = document.createElement('form');  // 
   let btnEnregistrer = document.createElement('button'); // 
   btnEnregistrer.textContent = "Enregistrer";
-  form.addEventListener('submit', (event) =>{
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
-    contacts.prenom = champPrenom.value;
-    contacts.nom = champNom.value;
-    contacts.email = champEmail.value;
-    contacts.phone = champPhone.value;
+    prenom = champPrenom.value;
+    nom = champNom.value;
+    email = champEmail.value;
+    phone = champPhone.value;
 
-    contact.push(contacts);
+    contactInfo = {
+      prenom: prenom,
+      nom: nom,
+      email: email,
+      phone: phone,
+    }
+    if (!(localStorage.getItem("users"))) {
+      localStorage.setItem("users", "[]")
+    }
+
+    let listUsers = localStorage.getItem("users");
+
+    let formattedListUsers = JSON.parse(listUsers)
+    formattedListUsers.push(contactInfo)
+    let data = JSON.stringify(formattedListUsers);
+
+    localStorage.setItem("users", data);
+
     form.reset();
     form.style.display = "none";
 
-    
+
   })
   // btnEnregistrer.classList('button');
 
   /* Création Input*/
   /* Champ Prénom*/
   let champPrenom = document.createElement('input');
+  let prenom = champPrenom.value;
+
   champPrenom.type = "text";
   champPrenom.placeholder = "Prenom";
-  
+
+
   /* Champ Nom*/
   let champNom = document.createElement('input');
   champNom.placeholder = "Prenom";
