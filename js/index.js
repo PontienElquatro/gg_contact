@@ -1,8 +1,22 @@
 
 
+function getUsers() {
+  if (!(localStorage.getItem("users"))) {
+    localStorage.setItem("users", "[]")
+  }
+
+  let listUsers = localStorage.getItem("users");
+
+  let formattedListUsers = JSON.parse(listUsers)
+  return formattedListUsers;
+}
 
 
 
+function insertUsersInLocalStorage(formattedListUsers) {
+  let toStr = JSON.stringify(formattedListUsers);
+  localStorage.setItem("users", toStr);
+}
 
 
 
